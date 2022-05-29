@@ -11,15 +11,15 @@ jobs:
     - name: run shell script
       run: echo commit hash is ${{ github.sha }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:${{ github.sha }}
+      #run: docker build . --file Dockerfile --tag my-image-name:${{ github.sha }}
 
-      #run: docker build -t '${{secrets.DOCKER_LOGIN}}'/ctse-lab-12:'${{github.sha}}' .
+      run: docker build -t '${{secrets.DOCKER_LOGIN}}'/ctse-lab-12:'${{github.sha}}' .
       
-    # - name: docker login
-    #   run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
+     - name: docker login
+       run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
 
-    # - name: push docker image
-    #   run: docker push '${{secrets.DOCKER_LOGIN}}'/ctse-lab-12:'${{github.sha}}'
+     - name: push docker image
+       run: docker push '${{secrets.DOCKER_LOGIN}}'/ctse-lab-12:'${{github.sha}}'
       
     # - name: Update config files in k8s
     #   run: sed -i.bak 's/{{tag}}/${{ github.sha }}/g' k8s/deploy.yaml  && rm k8s/*.bak
